@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#102a43">
+    <title>Stacks | Library Management</title>
+    <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+    <div id="toast" class="toast" role="status"></div>
+
+    <section id="login-view" class="login-view">
+        <div class="login-art">
+            <div class="brand-mark">S</div>
+            <p class="eyebrow">Stacks / Library operations</p>
+            <h1>A calmer way to run your collection.</h1>
+            <p class="login-copy">Keep every title, member, and movement of stock in one clear place.</p>
+            <div class="shelf-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <form id="login-form" class="login-card">
+            <p class="eyebrow">Welcome back</p>
+            <h2 id="login-title">Admin sign in</h2>
+            <p id="login-description" class="muted">Manage the collection, members, and daily circulation.</p>
+            <div class="login-switcher" role="tablist" aria-label="Choose account type">
+                <button type="button" class="login-switch active" data-login-role="admin" role="tab" aria-selected="true">Administrator</button>
+                <button type="button" class="login-switch" data-login-role="user" role="tab" aria-selected="false">Library user</button>
+            </div>
+            <label>Email<input name="email" type="email" value="admin@library.test" required autocomplete="email"></label>
+            <label>Password<input name="password" type="password" value="password" required autocomplete="current-password"></label>
+            <button id="login-submit" class="button button-primary button-wide" type="submit">Open admin workspace <span>-></span></button>
+            <p id="login-error" class="form-error"></p>
+        </form>
+    </section>
+
+    <div id="app-view" class="app-shell hidden">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <a class="brand" href="#dashboard"><span class="brand-mark small">S</span><span>Stacks</span></a>
+                <button id="close-sidebar" class="icon-button mobile-only" aria-label="Close navigation">x</button>
+            </div>
+            <p class="sidebar-label">Workspace</p>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="#dashboard" data-view="dashboard" class="nav-link active"><span>01</span>Overview</a>
+                <a href="#books" data-view="books" class="nav-link"><span>02</span>Books</a>
+                <a href="#members" data-view="members" data-admin-only class="nav-link"><span>03</span>Members</a>
+                <a href="#loans" data-view="loans" data-admin-only class="nav-link"><span>04</span>Loans</a>
+                <a href="#categories" data-view="categories" data-admin-only class="nav-link"><span>05</span>Categories</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-chip"><span id="user-initials">LA</span><div><strong id="user-name">Library Admin</strong><small>Administrator</small></div></div>
+                <button id="logout-button" class="logout-button">Sign out <span>-></span></button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar"><button id="open-sidebar" class="icon-button mobile-only" aria-label="Open navigation">=</button><div class="breadcrumb">Library <span>/</span> <strong id="page-label">Overview</strong></div><div class="topbar-date" id="today"></div></header>
+            <div class="page-content">
+                <section id="dashboard-view" class="page-view">
+                    <div class="page-heading"><div><p class="eyebrow">Wednesday, 30 September 2026</p><h1>Good morning, <span id="greeting-name">Admin</span>.</h1><p id="dashboard-copy" class="muted">Here is the pulse of your library today.</p></div><button class="button button-dark" data-admin-only data-action="new-book">+ Add a book</button></div>
+                    <div class="metric-grid"><article class="metric-card navy"><span>Total titles</span><strong id="metric-books">--</strong><small>Across your collection</small></article><article class="metric-card mint"><span>Available copies</span><strong id="metric-available">--</strong><small id="metric-availability">Ready to borrow</small></article><article class="metric-card cream"><span>Active members</span><strong id="metric-members">--</strong><small>People with access</small></article><article class="metric-card coral"><span>On loan</span><strong id="metric-loans">--</strong><small>Books currently out</small></article></div>
+                    <div class="dashboard-grid"><section class="panel recent-panel"><div class="panel-heading"><div><p class="eyebrow">Collection</p><h2>Recently added books</h2></div><a href="#books" class="text-link">View all -></a></div><div id="recent-books" class="book-list"></div></section><section class="panel quick-panel" data-admin-only><p class="eyebrow">Shortcuts</p><h2>Keep things moving.</h2><p class="muted">Jump straight into the tasks that keep your shelves useful.</p><div class="quick-actions"><button data-action="new-book"><span class="action-icon">+</span><span><strong>Add a new book</strong><small>Grow the collection</small></span><b>-></b></button><button data-action="new-member"><span class="action-icon">+</span><span><strong>Register a member</strong><small>Welcome someone new</small></span><b>-></b></button><a href="#loans"><span class="action-icon">↗</span><span><strong>Review active loans</strong><small>Keep returns on track</small></span><b>-></b></a></div></section></div>
+                </section>
+
+                <section id="books-view" class="page-view hidden"><div class="page-heading compact"><div><p class="eyebrow">Collection</p><h1>Books</h1><p class="muted">Search and manage every title on your shelves.</p></div><button class="button button-dark" data-action="new-book">+ Add a book</button></div><div class="toolbar"><label class="search-field"><span>⌕</span><input id="book-search" type="search" placeholder="Search title, author, or ISBN"></label><span id="books-count" class="result-count"></span></div><div class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>Title</th><th>Category</th><th>Author</th><th>Availability</th><th></th></tr></thead><tbody id="books-table"></tbody></table></div></div></section>
+
+                <section id="members-view" class="page-view hidden"><div class="page-heading compact"><div><p class="eyebrow">Community</p><h1>Members</h1><p class="muted">People who make the library worth running.</p></div><button class="button button-dark" data-action="new-member">+ Add a member</button></div><div class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>Member</th><th>Contact</th><th>Joined</th><th>Status</th><th>Loans</th></tr></thead><tbody id="members-table"></tbody></table></div></div></section>
+
+                <section id="loans-view" class="page-view hidden"><div class="page-heading compact"><div><p class="eyebrow">Circulation</p><h1>Loans</h1><p class="muted">Track what is out, what is due, and what came home.</p></div><button class="button button-dark" data-action="new-loan">+ Borrow a book</button></div><div class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>Book</th><th>Member</th><th>Loan date</th><th>Due date</th><th>Status</th><th></th></tr></thead><tbody id="loans-table"></tbody></table></div></div></section>
+
+                <section id="categories-view" class="page-view hidden"><div class="page-heading compact"><div><p class="eyebrow">Collection map</p><h1>Categories</h1><p class="muted">The shape and balance of your collection.</p></div><button class="button button-dark" data-action="new-category">+ Add a category</button></div><div id="category-grid" class="category-grid"></div></section>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-card"><div class="modal-heading"><div><p class="eyebrow" id="modal-kicker">New record</p><h2 id="modal-title">Add a book</h2></div><button id="close-modal" class="icon-button" aria-label="Close dialog">x</button></div><form id="modal-form"></form></div></div>
+    <script src="/app.js" defer></script>
+</body>
+</html>

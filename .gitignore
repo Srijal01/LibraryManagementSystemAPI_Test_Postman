@@ -1,0 +1,17 @@
+/vendor
+/node_modules
+/bootstrap/cache/*.php
+.env
+.env.*
+!.env.example
+.phpunit.result.cache
+storage/*.key
+database/*.sqlite
+/library_management
+storage/logs/*
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/app/public/*
+public/storage
+.DS_Store

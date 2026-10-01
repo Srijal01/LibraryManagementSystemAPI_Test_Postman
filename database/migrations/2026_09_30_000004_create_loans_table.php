@@ -1,0 +1,3 @@
+<?php
+use Illuminate\Database\Migrations\Migration;use Illuminate\Database\Schema\Blueprint;use Illuminate\Support\Facades\Schema;
+return new class extends Migration {public function up():void{Schema::create('loans',function(Blueprint $t){$t->id();$t->foreignId('book_id')->constrained()->restrictOnDelete();$t->foreignId('member_id')->constrained()->restrictOnDelete();$t->date('loan_date');$t->date('due_date');$t->date('returned_at')->nullable();$t->enum('status',['borrowed','returned'])->default('borrowed');$t->timestamps();$t->index(['book_id','member_id','status']);});}public function down():void{Schema::dropIfExists('loans');}};

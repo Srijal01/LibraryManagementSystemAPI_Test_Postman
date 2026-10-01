@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $id
  * @property int $book_id
  * @property int $member_id
+ * @property \Illuminate\Support\Carbon $loan_date
+ * @property \Illuminate\Support\Carbon $due_date
+ * @property \Illuminate\Support\Carbon|null $returned_at
  * @property string $status
+ * @property-read Book|null $book
+ * @property-read Member|null $member
  */
 class Loan extends Model {
     use HasFactory;

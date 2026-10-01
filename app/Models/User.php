@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $id
  * @property string $name
  * @property string $email
+ * @property string $password
  * @property string $role
+ * @property-read Member|null $member
  */
 class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;

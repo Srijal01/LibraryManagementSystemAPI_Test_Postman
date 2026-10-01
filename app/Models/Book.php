@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * @property int $id
  * @property int $category_id
+ * @property string $title
+ * @property string $isbn
+ * @property string $author
+ * @property string|null $publisher
+ * @property int|null $published_year
  * @property int $quantity
  * @property int $available_quantity
+ * @property-read Category|null $category
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Loan> $loans
  */
 class Book extends Model {
     use HasFactory;
